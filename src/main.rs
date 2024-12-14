@@ -2,9 +2,9 @@ mod game;
 use game::{Game, Player};
 
 fn main() {
-    let players = vec![Player::new("Raymond", 'x'), Player::new("Anaïs", 'o')];
+    let players = vec![Player::new("Whippo", 'x'), Player::new("Ray", 'o')];
 
-    let mut game = Game::new(5, 5, 4, players);
+    let mut game = Game::new(5, 7, 4, players);
 
     game.start();
 }

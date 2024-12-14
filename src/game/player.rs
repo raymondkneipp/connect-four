@@ -1,8 +1,3 @@
-// TODO GamePlayer trait
-// private struct fields
-// get_name
-// get_token
-
 #[derive(Clone, PartialEq)]
 pub struct Player {
     pub name: String,
