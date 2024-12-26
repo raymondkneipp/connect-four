@@ -17,12 +17,18 @@ impl Board {
     pub fn display(&self) -> String {
         let mut output = String::new();
 
+        // Determine the width needed to display the largest column index
+        let max_col_width = self.rows[0].len().to_string().len();
+
+        // Print the column headers (indices)
         for col in 0..self.rows[0].len() {
-            output.push_str(&format!(" {} ", col));
+            // Format each column index to be right-aligned within the max width
+            output.push_str(&format!("{:width$} ", col, width = max_col_width));
         }
 
         output.push('\n');
 
+        // Print the board rows
         for row in &self.rows {
             for col in row {
                 let symbol = match col {

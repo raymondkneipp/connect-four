@@ -1,3 +1,4 @@
+use crate::game::util;
 use crate::Player;
 use std::{collections::HashSet, io};
 
@@ -31,6 +32,10 @@ impl Game {
 
         if let Err(err) = Self::validate_game_config(row_count, col_count, tokens_to_win) {
             panic!("Invalid game configuration: {}", err);
+        }
+
+        if players.len() * tokens_to_win > row_count * col_count {
+            panic!("Too many players for the board size.");
         }
 
         Self {
@@ -159,6 +164,8 @@ impl Game {
 
     pub fn start(&mut self) {
         loop {
+            util::clear_terminal();
+
             println!("{}", self.board.display());
 
             match self.status() {
