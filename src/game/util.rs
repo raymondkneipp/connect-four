@@ -1,5 +1,8 @@
+//! Utility functions for the game
+
 use std::io::{self, Write};
 
+/// Clears the terminal screen
 pub fn clear_terminal() {
     // Check the OS and clear the screen accordingly
     if cfg!(target_os = "windows") {

@@ -30,6 +30,7 @@ pub struct Player {
 }
 
 impl Player {
+    /// Creates a new player with the given name and generates a token.
     pub fn new<S: Into<String>>(name: S) -> Self {
         let name = name.into();
         if name.is_empty() {

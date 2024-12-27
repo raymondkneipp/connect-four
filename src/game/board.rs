@@ -1,19 +1,25 @@
 use super::Player;
 
+/// Represents a row of the game board.
 pub type BoardRow = Vec<BoardCell>;
+/// Represents a cell on the game board.
 pub type BoardCell = Option<Player>;
 
+/// Represents a Connect Four game board.
 pub struct Board {
+    /// Stores state of the game board.
     pub rows: Vec<BoardRow>,
 }
 
 impl Board {
+    /// Creates a new game board with the specified number of rows and columns.
     pub fn new(row_count: usize, col_count: usize) -> Self {
         Self {
             rows: vec![vec![None; col_count]; row_count],
         }
     }
 
+    /// Displays the game board.
     pub fn display(&self) -> String {
         let mut output = String::new();
 
@@ -44,6 +50,7 @@ impl Board {
         output
     }
 
+    /// Places a token on the game board in the specified column.
     pub fn place_token(&mut self, col: usize, player: Player) {
         let mut target_row = 0;
 
@@ -56,6 +63,31 @@ impl Board {
         self.rows[target_row][col] = Some(player);
     }
 
+    /// Returns diagonal rows from top right to bottom left.
+    ///
+    /// ## Example
+    ///
+    /// ```
+    /// let board = Board::new(3, 3);
+    /// ```
+    ///
+    /// For demonstration purposes, let's populate the board with numbers to see how the diagonals are formed.
+    ///
+    /// The board looks like this:
+    /// ```text
+    /// [0][1][2]
+    /// [3][4][5]
+    /// [6][7][8]
+    /// ```
+    ///
+    /// The `get_diagonals_top_right_to_bottom_left` method will return the following:
+    /// ```text
+    /// [2],
+    /// [1, 5],
+    /// [0, 4, 8],
+    /// [3, 7],
+    /// [6]
+    /// ````
     pub fn get_diagonals_top_right_to_bottom_left(&self) -> Vec<Vec<BoardCell>> {
         let mut diagonals = Vec::new();
         let rows = self.rows.len();
@@ -77,6 +109,31 @@ impl Board {
         diagonals
     }
 
+    /// Returns diagonal rows from top left to bottom right.
+    ///
+    /// ## Example
+    ///
+    /// ```
+    /// let board = Board::new(3, 3);
+    /// ```
+    ///
+    /// For demonstration purposes, let's populate the board with numbers to see how the diagonals are formed.
+    ///
+    /// The board looks like this:
+    /// ```text
+    /// [0][1][2]
+    /// [3][4][5]
+    /// [6][7][8]
+    /// ```
+    ///
+    /// The `get_diagonals_top_left_to_bottom_right` method will return the following:
+    /// ```text
+    /// [0],
+    /// [3, 1],
+    /// [6, 4, 2],
+    /// [7, 5],
+    /// [8]
+    /// ````
     pub fn get_diagonals_top_left_to_bottom_right(&self) -> Vec<Vec<BoardCell>> {
         let mut diagonals = Vec::new();
         let rows = self.rows.len();
@@ -98,6 +155,7 @@ impl Board {
         diagonals
     }
 
+    /// Checks if the column is full.
     pub fn valid_move(&self, col: usize) -> bool {
         if col >= self.rows[0].len() {
             return false;
@@ -107,6 +165,7 @@ impl Board {
         self.rows.iter().any(|row| row[col].is_none())
     }
 
+    /// Checks to see if there are any more moves left.
     pub fn is_board_full(&self) -> bool {
         for row in &self.rows {
             if row.iter().any(|cell| cell.is_none()) {

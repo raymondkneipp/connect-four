@@ -39,6 +39,11 @@
 //!
 //! - [ ] WebSocket support for online multiplayer functionality.
 //! - [ ] An AI opponent to play against.
+//! - [ ] Make the game more colorful with [colored](https://docs.rs/colored/latest/colored/)
+//! - [ ] Add tests to ensure the game logic is correct.
+//! - [ ] Add README.md file with instructions on how to play the game.
+//! - [ ] Config game settings via a configuration file (env vars?).
+//! - [ ] Config game settings via interactive CLI prompts.
 //!
 //! ## Examples
 //!
@@ -62,6 +67,7 @@ pub mod game;
 use game::{Game, Player};
 
 #[derive(Parser)]
+#[command(version, about, long_about = None)]
 pub struct Args {
     /// The names of the players participating in the game.
     #[arg(short, long, value_parser, num_args = 2..=26, value_delimiter = ' ')]
@@ -82,8 +88,10 @@ pub struct Args {
 
 /// This is the main entry point for the Connect Four CLI game.
 fn main() {
+    // Parse the command-line arguments.
     let args = Args::parse();
 
+    // Create a new player for each name provided.
     let players = args
         .players
         .iter()
