@@ -58,7 +58,7 @@
 
 use clap::Parser;
 
-mod game;
+pub mod game;
 use game::{Game, Player};
 
 #[derive(Parser)]
@@ -76,6 +76,7 @@ pub struct Args {
     pub tokens_to_win: usize,
 }
 
+/// This is the main entry point for the Connect Four CLI game.
 fn main() {
     let args = Args::parse();
 
