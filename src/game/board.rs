@@ -18,7 +18,7 @@ impl Board {
         let mut output = String::new();
 
         // Determine the width needed to display the largest column index
-        let max_col_width = self.rows[0].len().to_string().len();
+        let max_col_width = self.rows[0].len().to_string().len() + 1;
 
         // Print the column headers (indices)
         for col in 0..self.rows[0].len() {
@@ -35,7 +35,7 @@ impl Board {
                     Some(player) => player.token,
                     None => ' ',
                 };
-                output.push_str(&format!("[{}]", symbol));
+                output.push_str(&format!("[{:width$}]", symbol, width = max_col_width - 1));
             }
 
             output.push('\n');
