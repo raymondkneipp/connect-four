@@ -1,5 +1,6 @@
 //! Utility functions for the game
 
+use clap::Parser;
 use std::io::{self, Write};
 
 /// Clears the terminal screen
@@ -14,4 +15,24 @@ pub fn clear_terminal() {
         print!("\x1B[2J\x1B[H"); // ANSI escape sequence to clear the screen and move cursor to top
         io::stdout().flush().unwrap();
     }
+}
+
+#[derive(Parser)]
+#[command(version, about, long_about = None)]
+pub struct Args {
+    /// The names of the players participating in the game.
+    #[arg(short, long, value_parser, num_args = 2..=26, value_delimiter = ' ')]
+    pub players: Vec<String>,
+
+    /// The number of rows on the game board.
+    #[arg(short, long, default_value = "6")]
+    pub rows: usize,
+
+    /// The number of columns on the game board.
+    #[arg(short, long, default_value = "7")]
+    pub cols: usize,
+
+    /// The number of connected tokens required to win the game.
+    #[arg(short, long, default_value = "4")]
+    pub tokens_to_win: usize,
 }

@@ -67,25 +67,7 @@ use clap::Parser;
 pub mod game;
 use game::{Game, Player};
 
-#[derive(Parser)]
-#[command(version, about, long_about = None)]
-pub struct Args {
-    /// The names of the players participating in the game.
-    #[arg(short, long, value_parser, num_args = 2..=26, value_delimiter = ' ')]
-    pub players: Vec<String>,
-
-    /// The number of rows on the game board.
-    #[arg(short, long, default_value = "6")]
-    pub rows: usize,
-
-    /// The number of columns on the game board.
-    #[arg(short, long, default_value = "7")]
-    pub cols: usize,
-
-    /// The number of connected tokens required to win the game.
-    #[arg(short, long, default_value = "4")]
-    pub tokens_to_win: usize,
-}
+use game::util::Args;
 
 /// This is the main entry point for the Connect Four CLI game.
 fn main() {
