@@ -22,9 +22,6 @@ jobs:
       - name: Build documentation
         run: cargo doc --no-deps
 
-      - name: Move main docs to root
-        run: mv target/doc/connect_four/* target/doc/
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
