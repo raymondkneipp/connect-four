@@ -15,9 +15,31 @@
 <a href="#14" id="14">14</a>
 <a href="#15" id="15">15</a>
 <a href="#16" id="16">16</a>
-<a href="#17" id="17">17</a></pre></div><pre class="rust"><code><span class="doccomment">//! Utility functions for the game
+<a href="#17" id="17">17</a>
+<a href="#18" id="18">18</a>
+<a href="#19" id="19">19</a>
+<a href="#20" id="20">20</a>
+<a href="#21" id="21">21</a>
+<a href="#22" id="22">22</a>
+<a href="#23" id="23">23</a>
+<a href="#24" id="24">24</a>
+<a href="#25" id="25">25</a>
+<a href="#26" id="26">26</a>
+<a href="#27" id="27">27</a>
+<a href="#28" id="28">28</a>
+<a href="#29" id="29">29</a>
+<a href="#30" id="30">30</a>
+<a href="#31" id="31">31</a>
+<a href="#32" id="32">32</a>
+<a href="#33" id="33">33</a>
+<a href="#34" id="34">34</a>
+<a href="#35" id="35">35</a>
+<a href="#36" id="36">36</a>
+<a href="#37" id="37">37</a>
+<a href="#38" id="38">38</a></pre></div><pre class="rust"><code><span class="doccomment">//! Utility functions for the game
 
-</span><span class="kw">use </span>std::io::{<span class="self">self</span>, Write};
+</span><span class="kw">use </span>clap::Parser;
+<span class="kw">use </span>std::io::{<span class="self">self</span>, Write};
 
 <span class="doccomment">/// Clears the terminal screen
 </span><span class="kw">pub fn </span>clear_terminal() {
@@ -31,5 +53,25 @@
         </span><span class="macro">print!</span>(<span class="string">"\x1B[2J\x1B[H"</span>); <span class="comment">// ANSI escape sequence to clear the screen and move cursor to top
         </span>io::stdout().flush().unwrap();
     }
+}
+
+<span class="attr">#[derive(Parser)]
+#[command(version, about, long_about = <span class="prelude-val">None</span>)]
+</span><span class="kw">pub struct </span>Args {
+    <span class="doccomment">/// The names of the players participating in the game.
+    </span><span class="attr">#[arg(short, long, value_parser, num_args = <span class="number">2</span>..=<span class="number">26</span>, value_delimiter = <span class="string">' '</span>)]
+    </span><span class="kw">pub </span>players: Vec&lt;String&gt;,
+
+    <span class="doccomment">/// The number of rows on the game board.
+    </span><span class="attr">#[arg(short, long, default_value = <span class="string">"6"</span>)]
+    </span><span class="kw">pub </span>rows: usize,
+
+    <span class="doccomment">/// The number of columns on the game board.
+    </span><span class="attr">#[arg(short, long, default_value = <span class="string">"7"</span>)]
+    </span><span class="kw">pub </span>cols: usize,
+
+    <span class="doccomment">/// The number of connected tokens required to win the game.
+    </span><span class="attr">#[arg(short, long, default_value = <span class="string">"4"</span>)]
+    </span><span class="kw">pub </span>tokens_to_win: usize,
 }
 </code></pre></div></section></main></body></html>

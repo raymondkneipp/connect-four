@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["clear_terminal"]};
+window.SIDEBAR_ITEMS = {"fn":["clear_terminal"],"struct":["Args"]};
