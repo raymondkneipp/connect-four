@@ -44,6 +44,7 @@
 //! - [ ] Add README.md file with instructions on how to play the game.
 //! - [ ] Config game settings via a configuration file (env vars?).
 //! - [ ] Config game settings via interactive CLI prompts.
+//! - [ ] Select column to drop token via arrow keys.
 //!
 //! ## Examples
 //!
