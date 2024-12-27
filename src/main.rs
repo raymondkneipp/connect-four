@@ -48,14 +48,14 @@
 //! ## Examples
 //!
 //! ```
+//! let rows = 6;
+//! let cols = 7;
+//! let tokens_to_win = 4;
+//!
 //! let players = vec![
 //!    Player::new("Alice"),
 //!    Player::new("Bob"),
 //! ]
-//!
-//! let rows = 6;
-//! let cols = 7;
-//! let tokens_to_win = 4;
 //!
 //! let mut game = Game::new(rows, cols, tokens_to_win, players);
 //! game.start();
